@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es-MX"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist · Grabación Stellantis Obregón</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1F1F1F;
+    --paper: #FAFAFA;
+    --smoke: #6B6B6B;
+    --mist: #E5E5E5;
+    --bone: #F3F3F3;
+    --rule: #D4D4D4;
+    --mustard: #C9A227;
+    --cobalt: #1E40AF;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+  body { font-family: 'Inter', system-ui, sans-serif; font-size: 17px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--mustard); color: var(--ink); }
+  .mono { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--smoke); }
+  .mono-ink { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); font-weight: 600; }
+
+  [contenteditable="true"] { transition: background 0.15s, box-shadow 0.15s; border-radius: 2px; }
+  [contenteditable="true"]:hover { background: rgba(201, 162, 39, 0.08); box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.35); }
+  [contenteditable="true"]:focus { background: rgba(201, 162, 39, 0.12); box-shadow: 0 0 0 2px var(--mustard); outline: none; }
+  [contenteditable="true"]:empty:before { content: attr(data-placeholder); color: var(--smoke); font-style: italic; }
+
+  /* Top bar */
+  .top-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 60; display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; background: rgba(250, 250, 250, 0.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--mist); }
+  .top-bar .oec { display: flex; align-items: center; gap: 12px; }
+  .top-bar .oec .logo-box { background: var(--paper); border: 1.5px solid var(--ink); padding: 5px 9px; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 11px; letter-spacing: 0.15em; border-radius: 4px; }
+  .top-bar .oec span { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink); font-weight: 600; }
+  .top-bar .actions { display: flex; gap: 8px; }
+  .top-bar button { background: var(--ink); color: var(--paper); border: none; padding: 7px 13px; font-family: 'Space Grotesk', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em; cursor: pointer; text-transform: uppercase; transition: background 0.2s; }
+  .top-bar button:hover { background: var(--mustard); color: var(--ink); }
+  .top-bar button.mustard { background: var(--mustard); color: var(--ink); }
+  .top-bar button.mustard:hover { background: var(--ink); color: var(--paper); }
+  .top-bar button.indicator { position: relative; }
+  .top-bar button.indicator::after { content: ''; position: absolute; top: 6px; right: 6px; width: 6px; height: 6px; border-radius: 50%; background: var(--cobalt); opacity: 0; transition: opacity 0.3s; }
+  .top-bar button.indicator.dirty::after { opacity: 1; }
+  .top-bar .hint { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--smoke); letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* Layout */
+  .container { max-width: 1100px; margin: 0 auto; padding: 80px 28px 60px; }
+
+  /* Header */
+  .header { padding: 16px 0 24px; border-bottom: 1px solid var(--mist); margin-bottom: 24px; }
+  .eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .eyebrow .line { width: 36px; height: 2px; background: var(--mustard); }
+  .eyebrow .tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.22em; color: var(--mustard); text-transform: uppercase; }
+  h1 { font-family: 'Space Grotesk', sans-serif; font-size: 3rem; font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 8px; }
+  h1 .accent { color: var(--mustard); }
+  .lead { font-size: 1.1rem; line-height: 1.5; max-width: 760px; margin: 0; color: var(--ink); }
+  h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; margin: 0; }
+  h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; margin: 0; }
+  p { margin: 0 0 8px; }
+  .sm { font-size: 0.95rem; color: var(--smoke); line-height: 1.4; }
+  strong { font-weight: 600; }
+
+  /* Day blocks */
+  .day { margin: 20px 0; padding: 20px 24px; border: 1px solid var(--mist); background: var(--paper); border-left: 4px solid var(--mustard); }
+  .day.sabado { border-left-color: var(--cobalt); }
+  .day-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+  .day-head .when { display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; }
+  .day-head .date { font-family: 'Space Grotesk', sans-serif; font-size: 1.7rem; font-weight: 700; letter-spacing: -0.02em; }
+  .day-head .time { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; color: var(--mustard); font-weight: 700; }
+  .day.sabado .day-head .time { color: var(--cobalt); }
+
+  /* Vehicle cards */
+  .vehicles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .vehicle { background: var(--bone); border: 1px solid var(--mist); padding: 16px 20px; }
+  .v-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+  .v-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.12em; padding: 3px 8px; background: var(--ink); color: var(--paper); font-weight: 600; text-transform: uppercase; }
+  .v-tag.video { background: var(--mustard); color: var(--ink); }
+  .v-tag.photo { background: var(--cobalt); color: var(--paper); }
+
+  /* Req list */
+  .req-section { margin-top: 10px; }
+  .req-section h4 { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; color: var(--mustard); text-transform: uppercase; margin-bottom: 4px; font-weight: 700; }
+  .checklist { list-style: none; padding: 0; margin: 0; }
+  .checklist li { display: flex; gap: 8px; align-items: flex-start; padding: 6px 0; font-size: 1rem; line-height: 1.45; border-bottom: 1px dotted var(--rule); }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li .box { flex-shrink: 0; width: 13px; height: 13px; border: 1.5px solid var(--ink); margin-top: 2px; cursor: pointer; transition: background 0.15s; }
+  .checklist li.done .box { background: var(--ink); position: relative; }
+  .checklist li.done .box::after { content: ''; position: absolute; left: 3px; top: 0px; width: 4px; height: 7px; border: solid var(--mustard); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+  .checklist li.done span { text-decoration: line-through; color: var(--smoke); }
+
+  /* Data row */
+  .data { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--mist); border: 1px solid var(--mist); margin-top: 8px; }
+  .data .cell { background: var(--paper); padding: 8px 12px; }
+  .data .cell .k { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 0.15em; color: var(--smoke); text-transform: uppercase; }
+  .data .cell .v { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700; margin-top: 1px; }
+
+  /* Concept tag */
+  .concept { background: var(--paper); border-left: 3px solid var(--cobalt); padding: 10px 14px; margin: 8px 0; font-size: 0.95rem; line-height: 1.45; }
+
+  /* Footer */
+  .footer { margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--mist); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .footer .note { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.12em; color: var(--smoke); text-transform: uppercase; }
+
+  /* Toast */
+  .toast { position: fixed; bottom: 24px; right: 24px; background: var(--ink); color: var(--paper); padding: 11px 16px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; z-index: 70; opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; pointer-events: none; }
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .vehicles { grid-template-columns: 1fr; }
+    .data { grid-template-columns: 1fr; }
+    h1 { font-size: 2rem; }
+  }
+  @media (max-width: 600px) {
+    .container { padding: 70px 16px 50px; }
+    .top-bar { padding: 10px 14px; }
+    .top-bar .oec span, .top-bar .hint { display: none; }
+    .top-bar button { padding: 6px 10px; font-size: 0.7rem; }
+  }
+
+  @media print {
+    .top-bar { display: none; }
+    .container { padding: 0; }
+    body { background: white; }
+    .day { break-inside: avoid; }
+    .vehicle { break-inside: avoid; }
+    [contenteditable="true"] { background: transparent !important; box-shadow: none !important; }
+  }
+
+  /* Suggestions banner */
+  .suggestions-note { display: flex; gap: 14px; align-items: flex-start; background: rgba(201, 162, 39, 0.10); border: 1.5px solid var(--mustard); border-left: 5px solid var(--mustard); padding: 14px 18px; margin: 0 0 20px; border-radius: 2px; }
+  .suggestions-icon { font-size: 1.3rem; font-weight: 700; color: var(--mustard); line-height: 1.3; flex-shrink: 0; }
+  .suggestions-body { font-size: 0.95rem; line-height: 1.5; color: var(--ink); }
+  .suggestions-body strong { font-weight: 700; color: var(--ink); }
+  .suggestions-sig { margin-top: 8px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mustard); font-weight: 600; }
+  @media (max-width: 600px) {
+    .suggestions-note { padding: 12px 14px; gap: 10px; }
+    .suggestions-body { font-size: 0.9rem; }
+  }
+
+
+  /* Vehicle title block (when subtitle is present) */
+  .v-title-block { display: flex; flex-direction: column; gap: 4px; }
+  .v-subtitle { font-family: 'Inter', system-ui, sans-serif; font-size: 0.82rem; font-weight: 500; color: var(--mustard); line-height: 1.35; letter-spacing: 0; text-transform: none; }
+  .v-subtitle:hover { background: rgba(201, 162, 39, 0.08); border-radius: 2px; }
+
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="oec">
+    <span class="logo-box" contenteditable="true">OEC</span>
+    <span contenteditable="true">Producción</span>
+  </div>
+  
+  <div class="actions">
+    <button class="indicator" id="statusBtn">Estado</button>
+    <button onclick="resetEdits()">Reiniciar</button>
+    
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="eyebrow">
+      <span class="line"></span>
+      <span class="tag" contenteditable="true">Checklist de grabación</span>
+    </div>
+    <h1 contenteditable="true">Grabación campaña <span class="accent">Stellantis Obregón</span></h1>
+    <p class="lead sm" contenteditable="true">Requerimientos por unidad · Viernes 3:30 PM y Sábado 8:00 AM</p>
+  </div>
+
+  
+
+  <!-- DÍA 1: VIERNES -->
+  <div class="day">
+    <div class="day-head">
+      <div class="when">
+        <span class="mono-ink" contenteditable="true">Día 1</span>
+        <span class="date" contenteditable="true">Viernes</span>
+        <span class="time" contenteditable="true">3:00 PM a 5:30 PM</span>
+      </div>
+      <span class="mono" contenteditable="true">Interior agencia</span>
+    </div>
+
+    <div class="vehicles">
+
+      <!-- ATTITUDE -->
+      <div class="vehicle">
+        <div class="v-head">
+          <h3 contenteditable="true">Dodge Attitude 2026</h3>
+          <span class="v-tag video">Video</span>
+        </div>
+        <div class="concept" contenteditable="true"><strong>Concepto:</strong> "Las verdades del Dodge Attitude" — datos reales con estética premium.</div>
+
+        <div class="req-section">
+          <h4 contenteditable="true">Vehículo</h4>
+          <ul class="checklist">
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">Completamente limpio (interior y exterior)</span></li>
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true"><strong>No demo</strong> — unidad nueva</span></li>
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">Sin cintas / sin marcas</span></li>
+          </ul>
+        </div>
+
+        <div class="req-section">
+          <h4 contenteditable="true">Personal</h4>
+          <ul class="checklist">
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">Un asesor(a) con guión aprendido.<br></span></li>
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">1 persona que mueva el carro en sala</span></li>
+          </ul>
+        </div>
+
+        <div class="req-section">
+          <h4 contenteditable="true">Espacio</h4>
+          <ul class="checklist">
+            
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">Espacio suficiente para maniobras del vehículo dentro de la agencia</span></li>
+            
+          </ul>
+        </div>
+
+        <div class="data">
+          <div class="cell"><div class="k">Rendimiento</div><div class="v" contenteditable="true">22.55 km/L</div></div>
+          <div class="cell"><div class="k">Precio desde</div><div class="v" contenteditable="true">$359,900</div></div>
+        </div>
+      </div>
+
+      <!-- PEUGEOT -->
+      <div class="vehicle">
+        <div class="v-head">
+          <h3 contenteditable="true">Peugeot 3008 y 5008</h3>
+          <span class="v-tag video">Video</span>
+        </div>
+        <div class="concept" contenteditable="true"><strong>Concepto:</strong> "Hay SUVs... y luego está Peugeot" — diseño francés + 3 años de mantenimiento incluidos.</div>
+
+        <div class="req-section">
+          <h4 contenteditable="true">Vehículos</h4>
+          <ul class="checklist">
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">3008 limpia por dentro y por fuera</span></li>
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">5008 limpia por dentro y por fuera</span></li>
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">Sin marcas en vidrios, carrocería e interiores</span></li>
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">No demo</span></li>
+          </ul>
+        </div>
+
+        <div class="req-section">
+          <h4>Personal</h4>
+          <ul class="checklist">
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">1 asesor(a) con guion aprendido</span></li>
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">Una persona del taller del servicio para hacer tomas de maniobras frente a cámara</span></li>
+          </ul>
+        </div>
+
+        <div class="req-section">
+          <h4>Espacio</h4>
+          <ul class="checklist">
+            
+            
+          </ul>
+        </div>
+
+        <div class="data">
+          <div class="cell"><div class="k">Gama desde</div><div class="v" contenteditable="true">$458,900</div></div>
+          <div class="cell"><div class="k">Beneficio</div><div class="v" contenteditable="true">3 años mantenimiento</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DÍA 2: SÁBADO -->
+  <div class="day sabado">
+    <div class="day-head">
+      <div class="when">
+        <span class="mono-ink" contenteditable="true">Día 2</span>
+        <span class="date" contenteditable="true">Sábado</span>
+        <span class="time" contenteditable="true">8:00 AM</span>
+      </div>
+      <span class="mono" contenteditable="true">Exterior + showroom</span>
+    </div>
+
+    <div class="vehicles">
+
+      <!-- RAM 700 -->
+      <div class="vehicle">
+        <div class="v-head">
+          <h3 contenteditable="true">RAM 700 + sedan chico</h3>
+          <span class="v-tag video">Video</span>
+        </div>
+        <div class="concept" contenteditable="true"><strong>Concepto:</strong> "¿Tu negocio ya creció y tú sigues usando la cajuela?" — pickup como herramienta de trabajo.</div>
+
+        <div class="req-section">
+          <h4>Vehículos</h4>
+          <ul class="checklist">
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">1 RAM 700 limpia</span></li>
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">1 sedan chico adicional (diferente al Attitude) limpio</span></li>
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">Sin marcas en ambos</span></li>
+          </ul>
+        </div>
+
+        <div class="req-section">
+          <h4>Personal</h4>
+          <ul class="checklist">
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">1 asesor con guion aprendido</span></li>
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">Una persona de apoyo que maniobre ambos vehículos</span></li>
+          </ul>
+        </div>
+
+        <div class="req-section">
+          <h4>Espacio</h4>
+          <ul class="checklist">
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">Exterior de la agencia para tomas dinámicas</span></li>
+            
+            
+          </ul>
+        </div>
+
+        <div class="data">
+          <div class="cell"><div class="k">Precio desde</div><div class="v" contenteditable="true">$334,900</div></div>
+          <div class="cell"><div class="k">Público</div><div class="v" contenteditable="true">Comerciantes</div></div>
+        </div>
+      </div>
+
+      <!-- RAM 1200 -->
+      <div class="vehicle">
+        <div class="v-head">
+          <div class="v-title-block">
+            <h3 contenteditable="true">RAM 1200</h3>
+            <div class="v-subtitle" contenteditable="true">Material necesario para cubrir la idea sugerida</div>
+          </div>
+        </div>
+        <div class="concept" contenteditable="true"><strong>Concepto:</strong> "La nueva fuerza de la categoría"&nbsp;</div>
+
+        <div class="req-section">
+          <h4>Vehículo</h4>
+          <ul class="checklist">
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">Camioneta limpia, sin marcas</span></li>
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">Tener la camioneta en el exterior para fotografía</span></li>
+          </ul>
+        </div>
+
+        <div class="req-section">
+          <h4>Personal</h4>
+          <ul class="checklist">
+            <li><span class="box" onclick="toggle(this)"></span><span contenteditable="true">1 asesor(a) con uniforme</span></li>
+          </ul>
+        </div>
+
+        <div class="req-section">
+          <h4>Espacio</h4>
+          <ul class="checklist">
+            
+            
+          </ul>
+        </div>
+
+        <div class="data">
+          <div class="cell"><div class="k">Precio desde</div><div class="v" contenteditable="true">$408,400</div></div>
+          <div class="cell"><div class="k">Versiones</div><div class="v" contenteditable="true">Chasis · Cabina · Doble</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="suggestions-note">
+    <div class="suggestions-icon" contenteditable="true">⚠</div>
+    <div class="suggestions-body">
+      <strong contenteditable="true">Todo lo anterior son sugerencias.</strong> <span contenteditable="true">Esperamos confirmación y validación de cada punto.&nbsp;<span style="background-color: rgba(201, 162, 39, 0.1);">Los diálogos e ideas proporcionadas son la base para las tomas a realizar. Quedamos atentos para cualquier duda o comentario.</span></span>
+      <div class="suggestions-sig" contenteditable="true">— Outcode Estudio Creativo</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span class="note">Editable · Click en cualquier texto</span>
+    <span class="note" contenteditable="true">Outcode Estudio Creativo</span>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const statusBtn = document.getElementById('statusBtn');
+  let isDirty = false;
+
+  document.addEventListener('input', (e) => {
+    if (e.target.isContentEditable) {
+      if (!isDirty) { isDirty = true; statusBtn.classList.add('dirty'); }
+    }
+  });
+
+  function toggle(box) {
+    box.parentElement.classList.toggle('done');
+    if (!isDirty) { isDirty = true; statusBtn.classList.add('dirty'); }
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show';
+    setTimeout(() => { t.className = 'toast'; }, 2400);
+  }
+
+  function resetEdits() {
+    if (!confirm('¿Reiniciar textos y checks?')) return;
+    document.querySelectorAll('[contenteditable="true"]').forEach(el => { el.innerHTML = ''; });
+    document.querySelectorAll('.checklist li').forEach(li => li.classList.remove('done'));
+    isDirty = false;
+    statusBtn.classList.remove('dirty');
+    showToast('Reiniciado');
+  }
+
+  function exportHTML() {
+    const clone = document.documentElement.cloneNode(true);
+    const sb = clone.querySelector('#statusBtn');
+    if (sb) sb.classList.remove('dirty');
+    // Remove the export button itself from the cloned document
+    const exportBtn = clone.querySelector('.pulse-export');
+    if (exportBtn) exportBtn.remove();
+    // Remove the "Click para editar" hint since the user has exported
+    const hint = clone.querySelector('.hint');
+    if (hint) hint.remove();
+    const html = '<!DOCTYPE html>\n' + clone.outerHTML;
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const ts = new Date().toISOString().slice(0,10);
+    const time = new Date().toTimeString().slice(0,5).replace(':', '');
+    a.href = url;
+    a.download = 'checklist-stellantis-obregon-' + ts + '-' + time + '.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('Descargado · checklist-stellantis-obregon-' + ts + '.html');
+    isDirty = false;
+    statusBtn.classList.remove('dirty');
+  }
+
+  statusBtn.addEventListener('click', () => {
+    const total = document.querySelectorAll('.checklist li').length;
+    const done = document.querySelectorAll('.checklist li.done').length;
+    const pct = total ? Math.round(done * 100 / total) : 0;
+    showToast(`${done} / ${total} items · ${pct}%`);
+  });
+</script>
+
+
+
+</body></html>
